@@ -8,6 +8,7 @@ import Header from "./components/header/header.component";
 import SignInAndSingUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
+import CheckoutPage from "./pages/checkout/checkout.component";
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -42,6 +43,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             exact
             path="/signin"
