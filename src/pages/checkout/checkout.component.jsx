@@ -1,6 +1,7 @@
 import React from "react";
 import "./checkout.styles.scss";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import CheckoutItem from "./../../components/checkout-item/checkout-item.component";
 import {
@@ -8,8 +9,9 @@ import {
   selectCartTotal
 } from "./../../redux/cart/cart.selectors";
 import StripeCheckoutButton from "./../../components/stripe-button/stripe-button.component";
+import { selectCurrentUser } from "./../../redux/user/user.selectors";
 
-const CheckoutPage = ({ cartItems, total }) => (
+const CheckoutPage = ({ cartItems, total, user }) => (
   <div className="checkout-page">
     <div className="checkout-header">
       <div className="header-block">
@@ -36,14 +38,14 @@ const CheckoutPage = ({ cartItems, total }) => (
     <div className="total">
       <span>TOTAL: ${total}</span>
     </div>
-
-    <StripeCheckoutButton price={total} />
+    {user ? <StripeCheckoutButton price={total} /> : <Redirect to="/signin" />}
   </div>
 );
 
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
-  total: selectCartTotal
+  total: selectCartTotal,
+  user: selectCurrentUser
 });
 
 export default connect(mapStateToProps)(CheckoutPage);
