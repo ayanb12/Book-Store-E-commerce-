@@ -9,6 +9,8 @@ import SignInAndSingUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import CheckoutPage from "./pages/checkout/checkout.component";
+// import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
+import { createStructuredSelector } from "reselect";
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -26,9 +28,12 @@ class App extends Component {
             ...snapShot.data()
           });
         });
-      } else {
-        setCurrentUser(userAuth);
       }
+      setCurrentUser(userAuth);
+      //   addCollectionAndDocuments(
+      //     "collections",
+      //     collectionsArray.map(({ title, items }) => ({ title, items }))
+      //   );
     });
   }
 
@@ -61,8 +66,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: setCurrentUser
+  //   collectionsArray: selectCollectionsForPreview
 });
 
 const mapDispatchToProps = dispatch => ({
