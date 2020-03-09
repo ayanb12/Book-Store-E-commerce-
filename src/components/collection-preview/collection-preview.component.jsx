@@ -4,7 +4,6 @@ import "./collection-preview.styles.scss";
 import CollectionItem from "./../collection-item/collection-item.component";
 
 const CollectionPreview = ({ title, items, match }) => {
-  console.log(match);
   return (
     <div className="collection-preview">
       <Link to={`${match.path}/${title.toLowerCase()}`} className="title">
