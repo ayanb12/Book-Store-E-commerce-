@@ -36,7 +36,7 @@ const CheckoutPage = ({ cartItems, total, user }) => (
     ))}
 
     <div className="total">
-      <span>TOTAL: ${total}</span>
+      <span>TOTAL: &#x20B9; {total}</span>
     </div>
     {user ? <StripeCheckoutButton price={total} /> : <Redirect to="/signin" />}
   </div>
